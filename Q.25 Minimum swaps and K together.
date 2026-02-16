@@ -1,0 +1,32 @@
+class Solution:
+    def minSwap(self, arr, k):
+        n = len(arr)
+        
+        # Count elements <= k
+        good = 0
+        for num in arr:
+            if num <= k:
+                good += 1
+        
+        # Count bad elements in first window
+        bad = 0
+        for i in range(good):
+            if arr[i] > k:
+                bad += 1
+        
+        min_swaps = bad
+        
+        # Sliding window
+        i = 0
+        j = good
+        while j < n:
+            if arr[i] > k:
+                bad -= 1
+            if arr[j] > k:
+                bad += 1
+            
+            min_swaps = min(min_swaps, bad)
+            i += 1
+            j += 1
+        
+        return min_swaps
