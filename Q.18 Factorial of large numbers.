@@ -1,0 +1,18 @@
+class Solution:
+    def factorial(self, n):
+        # Result stored as digits in reverse order
+        res = [1]
+
+        for x in range(2, n + 1):
+            carry = 0
+            for i in range(len(res)):
+                prod = res[i] * x + carry
+                res[i] = prod % 10
+                carry = prod // 10
+
+            while carry:
+                res.append(carry % 10)
+                carry //= 10
+
+        # Reverse to get correct order
+        return res[::-1]
